@@ -1,6 +1,6 @@
 const express = require("express")
 const z = require("zod")
-const { User } = require("../db")
+const { User, Account } = require("../db")
 const jwt = require("jsonwebtoken")
 const { JWT_SECRET } = require("../config")
 const { authMiddleware } = require("../middleware")
@@ -30,6 +30,10 @@ router.post('/signup', async (req, res) => {
         lastName: req.body.lastName
     })
     const userId = user._id
+    const balance = await Account.create({
+        userId,
+        balance : 1 + Math.random()*10000
+    })
     const token = jwt.sign({ userId }, JWT_SECRET)
     res.status(200).json({
         message: "User Created Successfully",
@@ -75,12 +79,7 @@ router.put("/", authMiddleware ,async (req, res) => {
     }
 
     try {
-        // Assuming User is a mongoose model
-        console.log({ body : req.body})
-        
-        await User.updateOne(req.body, {
-            _id: req.userId
-        })
+        await User.updateOne({_id: req.userId}, req.body)
 
         res.json({
             message: "Updated successfully"
