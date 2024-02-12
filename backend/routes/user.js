@@ -112,6 +112,9 @@ router.get("/bulk",async(req,res)=>{
 
 
 })
+router.get("/verify",authMiddleware,async(req,res)=>{
+    res.send(true)
+})
 
 
 module.exports = router;
