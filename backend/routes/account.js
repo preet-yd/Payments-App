@@ -11,7 +11,7 @@ router.get("/balance", authMiddleware, async (req, res) => {
         return res.status(200).json({ balance: User.balance })
     }
     catch (err) {
-        return res.json({ message: "some error occured while fetching the balance" })
+        return res.json({ message: `some error occured while fetching the balance ${err}` })
     }
 
 })
