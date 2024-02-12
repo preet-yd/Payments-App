@@ -7,27 +7,25 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 const balance = 0;
 function Dashboard() {
-//     const authToken = localStorage.getItem('auth');
-//     console.log(authToken);
+    const [balance, setBalance] = React.useState(0);
+    const fetchBalance = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/api/v1/account/balance', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                },
+            });
 
-//      const fetchData = async () => {
-//     try {
-//       const response = await axios.get('http://localhost:3000/api/v1/account/balance', {
-//         headers: {
-//           Authorization: `Bearer ${authToken}`,
-//         },
-//       });
+            setBalance(Math.floor(response.data.balance))
 
-//       const balance = response.data;
-      
-//     } catch (error) {
-//         console.error('Error fetching balance:', error);      
-//     }
-//   };
+        } catch (error) {
+            console.error('Error fetching balance:', error);
+        }
+    };
 
-//   useEffect(() => {
-//     fetchData();
-//   }, [authToken]);
+    useEffect(() => {
+        fetchBalance();
+    }, [balance]);
 
     return (
         <>
