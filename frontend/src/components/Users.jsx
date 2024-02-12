@@ -52,7 +52,7 @@ function User({ user }) {
 
         <div className="flex flex-col justify-center h-ful">
             <Button onClick={() => {
-                navigate("/send")
+                navigate("/send?id=" + user._id + "&name=" + user.firstName )
             }
             } label={"Send Money"} />
         </div>
