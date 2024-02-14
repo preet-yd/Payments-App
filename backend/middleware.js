@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken-promisified"); // Use the alternative library
+const jwt = require("jsonwebtoken")
 const { JWT_SECRET } = require("./config")
 
 function authMiddleware (req,res,next) {
