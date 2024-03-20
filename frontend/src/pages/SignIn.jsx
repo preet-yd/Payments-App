@@ -23,12 +23,12 @@ function SignIn() {
                 <div className="pt-4">
                     <Button onClick={
                         async()=> {
-                            const response = await axios.post("http://localhost:3000/api/v1/user/signin", {
+                            const response = await axios.post("https://paytm-2wwo.onrender.com/api/v1/user/signin", {
                                 username,
                                 password
                             })
                             localStorage.setItem("token" , response.data.token)
-                            navigate("/dashboard")
+                            navigate("/")
                         }
                     } label={"Sign In"} />
                 </div>

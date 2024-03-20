@@ -11,7 +11,7 @@ export const Users = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/v1/user/bulk?filter=${filter}`);
+                const response = await axios.get(`https://paytm-2wwo.onrender.com/api/v1/user/bulk?filter=${filter}`);
                 setUsers(response.data.users);
             } catch (error) {
                 console.error("Error fetching users:", error);
@@ -28,7 +28,7 @@ export const Users = () => {
             <input onChange={e => { setFilter(e.target.value) }} type="text" placeholder="Search users..." className="w-full px-2 py-1 border rounded border-slate-200"></input>
         </div>
         <div>
-            {users.map(user => <User user={user} />)}
+            {users.map((user,i) => <User key={i} user={user} />)}
         </div>
     </>
 }

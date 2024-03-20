@@ -12,7 +12,7 @@ export default function SendMoney() {
     // console.log(id, name);
 
     async function transferFunds(){
-        const response = await axios.post("http://localhost:3000/api/v1/account/transfer",{
+        const response = await axios.post("https://paytm-2wwo.onrender.com/api/v1/account/transfer",{
             to: id,
             amount
         },
@@ -23,7 +23,7 @@ export default function SendMoney() {
         }
         )
         alert(response.data.message);
-        navigate("/dashboard");
+        navigate("/");
     }
 
     return <div className="flex justify-center h-screen bg-gray-100">
