@@ -41,22 +41,23 @@ router.post('/signup', async (req, res) => {
     })
 })
 
-const UserSignInSchem = z.object({
+const UserSignInSchema = z.object({
     username: z.string().email(),
     password: z.string(),
 })
 
-router.post("/signin", (req, res) => {
+router.post("/signin", async(req, res) => {
     const body = req.body
-    const { success } = UserSignInSchem.safeParse(body)
-    if (!{ success }) {
-        res.status
+    const { success } = UserSignInSchema.safeParse(body)
+    if (!success) {
+        return res.status(411).json({ message: "Incorrect inputs" })
     }
-    const user = User.findOne({ username: body.username })
+    const user = await User.findOne({ username: req.body.username , password : req.body.password});
     if (user) {
         const userId = user._id
         const token = jwt.sign({ userId }, JWT_SECRET)
-        res.status(200).json({ token: token })
+        
+        return res.status(200).json({ token: token , userid : userId})
     }
     res.status(411).json({ message: "Error while logging in" })
 
