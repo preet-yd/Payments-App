@@ -35,8 +35,8 @@ function SignIn() {
                                 setError("Email should end with @gmail.com");
                                 return;
                             }
-                            if (password.length < 6) {
-                                setError("Password should be at least 6 characters long");
+                            if (password.length <= 6) {
+                                setError("Password should be at least more than 6 characters long");
                                 return;
                             }
 
